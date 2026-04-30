@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anemoia Records — 3-Year Financial Plan</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -35,9 +35,9 @@
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Inter', 'IBM Plex Mono', sans-serif;
-  font-size: 13px;
-  line-height: 1.6;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
 }
 
 /* ── NAV ── */
@@ -60,7 +60,7 @@ nav {
   color: #64748b; padding: 0 16px; height: 52px;
   display: flex; align-items: center; cursor: pointer;
   border-bottom: 3px solid transparent; transition: all 0.15s;
-  white-space: nowrap; flex-shrink: 0; font-family: 'Inter', sans-serif;
+  white-space: nowrap; flex-shrink: 0; font-family: 'Plus Jakarta Sans', sans-serif;
 }
 .nav-tab:hover { color: #cbd5e1; }
 .nav-tab.active { color: #f1f5f9; border-bottom-color: var(--accent); }
@@ -138,8 +138,8 @@ th {
 }
 th:not(:first-child) { text-align: right; }
 td {
-  padding: 10px 12px; border-bottom: 1px solid var(--border);
-  font-size: 12px; color: var(--ink-mid); vertical-align: middle;
+  padding: 11px 12px; border-bottom: 1px solid var(--border);
+  font-size: 13px; color: var(--ink-mid); vertical-align: middle;
 }
 td:not(:first-child) { text-align: right; }
 tr:hover td { background: #f8fafc; }
@@ -253,7 +253,7 @@ tr:last-child td { border-bottom: none; }
   color: var(--ink-dim); margin-right: 4px; font-family: 'IBM Plex Mono', monospace;
 }
 .scenario-btn {
-  font-family: 'Inter', sans-serif; font-size: 12px;
+  font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px;
   padding: 7px 20px; border: 1.5px solid var(--border-dark);
   background: var(--surface); color: var(--ink-mid);
   cursor: pointer; transition: all 0.15s; border-radius: 20px;
@@ -266,6 +266,7 @@ tr:last-child td { border-bottom: none; }
 .builder-panel {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 24px;
+  overflow: hidden;
 }
 .builder-section-title {
   font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
@@ -275,13 +276,13 @@ tr:last-child td { border-bottom: none; }
 .input-row { margin-bottom: 20px; }
 .input-label {
   display: flex; justify-content: space-between; align-items: baseline;
-  margin-bottom: 8px; font-size: 11px; color: var(--ink-mid); font-weight: 500;
+  margin-bottom: 8px; font-size: 12px; color: var(--ink-mid); font-weight: 500;
 }
 .input-val { font-size: 13px; font-weight: 700; color: var(--accent); }
 
 input[type=text].jv-text {
   width: 100%; background: var(--bg); border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm); font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink);
+  border-radius: var(--radius-sm); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; color: var(--ink);
   padding: 9px 12px; outline: none; transition: border-color 0.15s, box-shadow 0.15s;
 }
 input[type=text].jv-text:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.12); }
@@ -301,7 +302,7 @@ input[type=range].jv-slider::-moz-range-thumb { width: 17px; height: 17px; backg
 
 .term-selector { display: flex; border-radius: var(--radius-sm); overflow: hidden; border: 1.5px solid var(--border-dark); }
 .term-btn {
-  flex: 1; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
+  flex: 1; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 12px; font-weight: 500;
   padding: 8px 0; text-align: center; background: var(--surface); color: var(--ink-mid);
   cursor: pointer; border-right: 1px solid var(--border-dark); transition: all 0.12s;
 }
@@ -358,7 +359,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
 .deal-item { margin-bottom: 14px; }
 .deal-item:last-child { margin-bottom: 0; }
 .deal-item-key { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 4px; font-family: 'IBM Plex Mono', monospace; }
-.deal-item-val { font-size: 12px; color: var(--ink-mid); line-height: 1.8; }
+.deal-item-val { font-size: 13px; color: var(--ink-mid); line-height: 1.8; }
 .deal-item-val strong { color: var(--ink); font-weight: 600; }
 
 .proposal-narrative { background: #0f172a; color: #f1f5f9; padding: 40px 44px; margin-bottom: 0; border-radius: var(--radius); box-shadow: var(--shadow-lg); }
