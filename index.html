@@ -1055,11 +1055,11 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
 
       <div class="input-row">
         <div class="input-label">
-          <span>Recordings in Slate</span>
+          <span>Releases in Slate</span>
           <span class="input-val" id="val-recordings">20</span>
         </div>
-        <input type="range" class="jv-slider" id="inp-recordings" min="50" max="300" step="5" value="100" oninput="jvUpdate()">
-        <div class="slider-range-labels"><span>50</span><span>300</span></div>
+        <input type="range" class="jv-slider" id="inp-recordings" min="5" max="80" step="1" value="20" oninput="jvUpdate()">
+        <div class="slider-range-labels"><span>5 releases</span><span>80 releases</span></div>
       </div>
 
       <div class="input-row">
@@ -1191,7 +1191,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
         <div class="ask-total-num" id="out-total">$2,200,000</div>
         <div class="ask-total-sub">
           Proposed to <strong id="out-partner-name" style="color:#f5f2eb">JV Partner</strong><br>
-          <span id="out-term-display">3-year</span> term &nbsp;·&nbsp; <span id="out-rec-count">20</span> recordings &nbsp;·&nbsp; <span id="out-per-rec">$110k / rec</span>
+          <span id="out-term-display">3-year</span> term &nbsp;·&nbsp; <span id="out-rec-count">20</span> releases &nbsp;·&nbsp; <span id="out-per-rec">$110k / release</span>
         </div>
       </div>
 
@@ -1496,7 +1496,7 @@ function jvUpdate() {
   document.getElementById('out-total').textContent        = fmtFull(total);
   document.getElementById('out-term-display').textContent = jvTerm + '-year';
   document.getElementById('out-rec-count').textContent    = recordings;
-  document.getElementById('out-per-rec').textContent      = fmtShort(perRec) + ' / rec';
+  document.getElementById('out-per-rec').textContent      = fmtShort(perRec) + ' / release';
   document.getElementById('out-uplift-label').textContent = 'at ' + uplift.toFixed(1) + '× uplift';
 
   // Breakdown bar
@@ -1509,8 +1509,8 @@ function jvUpdate() {
 
   // Breakdown table
   const rows = [
-    { label:'Recording &amp; Production', total:recording, perR:recPerRec, ok:recPerRec>=40000, warn:recPerRec>=27000, bench:'$40k+ / rec is industry standard' },
-    { label:'Marketing &amp; Promotion',  total:marketing, perR:mktPerRec, ok:mktPerRec>=25000, warn:mktPerRec>=16000, bench:'$25k+ / rec for a real campaign' },
+    { label:'Recording &amp; Production', total:recording, perR:recPerRec, ok:recPerRec>=15000, warn:recPerRec>=8000,  bench:'$15k+ / release — solid indie standard' },
+    { label:'Marketing &amp; Promotion',  total:marketing, perR:mktPerRec, ok:mktPerRec>=8000,  warn:mktPerRec>=4000,  bench:'$8k+ / release — real indie campaign' },
     { label:'Label Operations',           total:ops,       perR:null,      ok:ops>=OPEX_GAP_2YR, warn:ops>=OPEX_GAP_2YR*0.8, bench:'$386k+ covers 2-yr OPEX gap' },
   ];
   document.getElementById('out-breakdown-table').innerHTML = rows.map(r => {
@@ -1531,7 +1531,7 @@ function jvUpdate() {
     const cls    = r.ok ? 'hi-ok' : r.warn ? 'hi-warn' : 'hi-bad';
     const txt    = r.ok ? 'Solid' : r.warn ? 'Workable' : 'At Risk';
     const detail = r.perR !== null
-      ? r.label.replace(/&amp;/g,'&') + ': ' + fmtShort(Math.round(r.perR)) + ' per recording'
+      ? r.label.replace(/&amp;/g,'&') + ': ' + fmtShort(Math.round(r.perR)) + ' per release'
       : 'Ops covers ' + Math.round((ops/OPEX_GAP_2YR)*100) + '% of 2-year OPEX gap ($386k)';
     return `<div class="health-item"><span class="health-item-label">${detail}</span><span class="health-item-status ${cls}">${txt}</span></div>`;
   }).join('');
@@ -1616,10 +1616,10 @@ function jvUpdate() {
   const healthWord   = allOk ? 'fully justified' : anyBad ? 'a minimum-viable ask — any lower risks being underfunded mid-term' : 'lean but workable';
   document.getElementById('out-narrative').innerHTML = `
     Anemoia Records proposes a <strong>${jvTerm}-year Funding and Distribution Joint Venture</strong> with <strong>${partner}</strong>,
-    anchored by <strong>${artist}</strong> and covering a slate of up to <strong>${recordings} recordings</strong>.
+    anchored by <strong>${artist}</strong> and covering a slate of up to <strong>${recordings} releases</strong>.
     <br><br>
     The total buy-in requested is <strong>${fmtFull(total)}</strong> — ${fmtFull(recording)} in recording &amp; production
-    (${fmtShort(Math.round(recPerRec))} per recording), ${fmtFull(marketing)} in marketing &amp; promotion
+    (${fmtShort(Math.round(recPerRec))} per release), ${fmtFull(marketing)} in marketing &amp; promotion
     (${fmtShort(Math.round(mktPerRec))} per release), and ${fmtFull(ops)} in label operations support.
     At these numbers the ask is <strong>${healthWord}</strong>.
     <br><br>
