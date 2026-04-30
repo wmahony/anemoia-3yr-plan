@@ -344,6 +344,46 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
 }
 @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 
+/* ---- Per-Year Budget Grid ---- */
+.budget-grid {
+  width: 100%; border-collapse: collapse; margin-bottom: 8px;
+}
+.budget-grid thead th {
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink-dim); padding: 0 6px 8px; text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.budget-grid thead th:first-child { text-align: left; }
+.budget-grid tbody td {
+  padding: 10px 6px; border-bottom: 1px solid var(--border); vertical-align: top;
+}
+.budget-grid tbody td:first-child {
+  font-size: 10px; color: var(--ink-mid); padding-right: 10px;
+  vertical-align: middle; white-space: nowrap;
+}
+.budget-grid tbody td:last-child {
+  text-align: center; vertical-align: middle;
+  font-family: 'Libre Baskerville', serif; font-size: 13px; color: var(--ink);
+  padding-left: 12px; border-left: 1px solid var(--border);
+}
+.budget-cell { text-align: center; min-width: 72px; }
+.budget-cell-val {
+  font-size: 11px; color: var(--ink); font-family: 'Libre Baskerville', serif;
+  margin-bottom: 5px; text-align: center;
+}
+.budget-grid tfoot td {
+  font-size: 11px; font-family: 'Libre Baskerville', serif; color: var(--ink);
+  text-align: center; padding: 10px 6px 4px; border-top: 2px solid var(--border-dark);
+}
+.budget-grid tfoot td:first-child {
+  font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+  text-transform: uppercase; letter-spacing: 0.15em; color: var(--ink-dim);
+  text-align: left; vertical-align: middle;
+}
+.budget-grid tfoot td:last-child {
+  border-left: 1px solid var(--border); color: var(--ink); font-size: 14px;
+}
+
 @media (max-width: 800px) {
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
   .milestone-grid { grid-template-columns: 1fr 1fr; }
@@ -1021,34 +1061,78 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
         </div>
       </div>
 
-      <div class="builder-section-title" style="margin-top:28px">Budget Ask</div>
+      <div class="builder-section-title" style="margin-top:28px">Budget Ask — by Year</div>
 
-      <div class="input-row">
-        <div class="input-label">
-          <span>Recording &amp; Production</span>
-          <span class="input-val" id="val-recording">$950k</span>
-        </div>
-        <input type="range" class="jv-slider" id="inp-recording" min="200000" max="2000000" step="25000" value="950000" oninput="jvUpdate()">
-        <div class="slider-range-labels"><span>$200k</span><span>$2M</span></div>
-      </div>
-
-      <div class="input-row">
-        <div class="input-label">
-          <span>Marketing &amp; Promotion</span>
-          <span class="input-val" id="val-marketing">$500k</span>
-        </div>
-        <input type="range" class="jv-slider" id="inp-marketing" min="100000" max="1500000" step="25000" value="500000" oninput="jvUpdate()">
-        <div class="slider-range-labels"><span>$100k</span><span>$1.5M</span></div>
-      </div>
-
-      <div class="input-row">
-        <div class="input-label">
-          <span>Label Operations Support</span>
-          <span class="input-val" id="val-ops">$750k</span>
-        </div>
-        <input type="range" class="jv-slider" id="inp-ops" min="200000" max="1500000" step="25000" value="750000" oninput="jvUpdate()">
-        <div class="slider-range-labels"><span>$200k</span><span>$1.5M</span></div>
-      </div>
+      <table class="budget-grid">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Year 1</th>
+            <th>Year 2</th>
+            <th>Year 3</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Recording &amp; Production</td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-rec-y1">$250k</div>
+              <input type="range" class="jv-slider" id="inp-rec-y1" min="25000" max="750000" step="25000" value="250000" oninput="jvUpdate()">
+            </td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-rec-y2">$350k</div>
+              <input type="range" class="jv-slider" id="inp-rec-y2" min="25000" max="750000" step="25000" value="350000" oninput="jvUpdate()">
+            </td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-rec-y3">$350k</div>
+              <input type="range" class="jv-slider" id="inp-rec-y3" min="25000" max="750000" step="25000" value="350000" oninput="jvUpdate()">
+            </td>
+            <td id="val-rec-total">$950k</td>
+          </tr>
+          <tr>
+            <td>Marketing &amp; Promotion</td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-mkt-y1">$100k</div>
+              <input type="range" class="jv-slider" id="inp-mkt-y1" min="25000" max="750000" step="25000" value="100000" oninput="jvUpdate()">
+            </td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-mkt-y2">$150k</div>
+              <input type="range" class="jv-slider" id="inp-mkt-y2" min="25000" max="750000" step="25000" value="150000" oninput="jvUpdate()">
+            </td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-mkt-y3">$250k</div>
+              <input type="range" class="jv-slider" id="inp-mkt-y3" min="25000" max="750000" step="25000" value="250000" oninput="jvUpdate()">
+            </td>
+            <td id="val-mkt-total">$500k</td>
+          </tr>
+          <tr>
+            <td>Label Operations</td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-ops-y1">$300k</div>
+              <input type="range" class="jv-slider" id="inp-ops-y1" min="25000" max="750000" step="25000" value="300000" oninput="jvUpdate()">
+            </td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-ops-y2">$250k</div>
+              <input type="range" class="jv-slider" id="inp-ops-y2" min="25000" max="750000" step="25000" value="250000" oninput="jvUpdate()">
+            </td>
+            <td class="budget-cell">
+              <div class="budget-cell-val" id="val-ops-y3">$200k</div>
+              <input type="range" class="jv-slider" id="inp-ops-y3" min="25000" max="750000" step="25000" value="200000" oninput="jvUpdate()">
+            </td>
+            <td id="val-ops-total">$750k</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Year Total</td>
+            <td id="val-y1-total">$650k</td>
+            <td id="val-y2-total">$750k</td>
+            <td id="val-y3-total">$800k</td>
+            <td id="val-grand-total">$2,200,000</td>
+          </tr>
+        </tfoot>
+      </table>
 
       <div class="builder-section-title" style="margin-top:28px">Revenue Split</div>
 
@@ -1328,10 +1412,17 @@ function setTerm(t, el) {
 }
 
 function setScenario(s, el) {
-  const sc = { lean: [600000,350000,450000], balanced: [950000,500000,750000], resourced: [1200000,700000,1000000] }[s];
-  document.getElementById('inp-recording').value = sc[0];
-  document.getElementById('inp-marketing').value = sc[1];
-  document.getElementById('inp-ops').value = sc[2];
+  // [rec-y1, rec-y2, rec-y3, mkt-y1, mkt-y2, mkt-y3, ops-y1, ops-y2, ops-y3]
+  const sc = {
+    lean:      [150000, 200000, 250000,  75000, 100000, 175000, 175000, 150000, 125000],
+    balanced:  [250000, 350000, 350000, 100000, 150000, 250000, 300000, 250000, 200000],
+    resourced: [350000, 425000, 425000, 150000, 225000, 325000, 400000, 325000, 275000],
+  }[s];
+  ['rec','mkt','ops'].forEach((cat, ci) =>
+    [1,2,3].forEach((yr, yi) =>
+      document.getElementById(`inp-${cat}-y${yr}`).value = sc[ci*3 + yi]
+    )
+  );
   document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
   jvUpdate();
@@ -1348,9 +1439,12 @@ function jvUpdate() {
   const partner    = document.getElementById('inp-partner').value || 'Partner';
   const artist     = document.getElementById('inp-artist').value  || 'Artist';
   const recordings = parseInt(document.getElementById('inp-recordings').value);
-  const recording  = parseInt(document.getElementById('inp-recording').value);
-  const marketing  = parseInt(document.getElementById('inp-marketing').value);
-  const ops        = parseInt(document.getElementById('inp-ops').value);
+  const recY = [1,2,3].map(i => parseInt(document.getElementById('inp-rec-y'+i).value));
+  const mktY = [1,2,3].map(i => parseInt(document.getElementById('inp-mkt-y'+i).value));
+  const opsY = [1,2,3].map(i => parseInt(document.getElementById('inp-ops-y'+i).value));
+  const recording  = recY.reduce((a,b) => a+b, 0);
+  const marketing  = mktY.reduce((a,b) => a+b, 0);
+  const ops        = opsY.reduce((a,b) => a+b, 0);
   const distribFee = parseInt(document.getElementById('inp-distrib-fee').value) / 100;
   const netSplit   = parseInt(document.getElementById('inp-net-split').value) / 100;
   const upliftRaw  = parseInt(document.getElementById('inp-uplift').value);
@@ -1368,9 +1462,17 @@ function jvUpdate() {
 
   // Slider labels
   document.getElementById('val-recordings').textContent  = recordings;
-  document.getElementById('val-recording').textContent   = fmtShort(recording);
-  document.getElementById('val-marketing').textContent   = fmtShort(marketing);
-  document.getElementById('val-ops').textContent         = fmtShort(ops);
+  // Per-year budget grid labels
+  [1,2,3].forEach((yr, i) => {
+    document.getElementById('val-rec-y'+yr).textContent = fmtShort(recY[i]);
+    document.getElementById('val-mkt-y'+yr).textContent = fmtShort(mktY[i]);
+    document.getElementById('val-ops-y'+yr).textContent = fmtShort(opsY[i]);
+    document.getElementById('val-y'+yr+'-total').textContent = fmtShort(recY[i]+mktY[i]+opsY[i]);
+  });
+  document.getElementById('val-rec-total').textContent   = fmtShort(recording);
+  document.getElementById('val-mkt-total').textContent   = fmtShort(marketing);
+  document.getElementById('val-ops-total').textContent   = fmtShort(ops);
+  document.getElementById('val-grand-total').textContent = fmtFull(total);
   document.getElementById('val-distrib-fee').textContent = Math.round(distribFee * 100) + '%';
   document.getElementById('val-net-split').textContent   = Math.round(netSplit * 100) + '%';
   document.getElementById('val-uplift').textContent      = uplift.toFixed(1) + '×';
