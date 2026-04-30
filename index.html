@@ -964,24 +964,6 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
     <div class="inv-tag alt">Advanced</div>
   </div>
 
-  <div class="section-head">Target <em>Investor Profiles</em></div>
-  <div class="card full">
-    <table>
-      <thead><tr><th>Type</th><th>Typical Check</th><th>What They Want</th><th>Pitch Angle</th></tr></thead>
-      <tbody>
-        <tr><td>Music-Adjacent Angels</td><td>$50k–$250k</td><td class="dim">Passion + financial return</td><td>Roster quality, Anemoia's aesthetic identity, catalog thesis</td></tr>
-        <tr><td>Family Offices</td><td>$250k–$750k</td><td class="dim">Alternative assets, yield, low market correlation</td><td>Revenue share structure; catalog as alternative investment class</td></tr>
-        <tr><td>Music-Focused VCs</td><td>$500k–$1.5M</td><td class="dim">Equity stake + acquisition exit in 5–7 years</td><td>Label consolidation trend, streaming growth, Year 3 self-sustaining</td></tr>
-        <tr><td>Industry Insiders</td><td>$25k–$150k</td><td class="dim">Credibility, deal flow access, financial return</td><td>Roster quality, Austin positioning, long-term relationship</td></tr>
-        <tr><td>Sync / Media Companies</td><td>Strategic</td><td class="dim">First-look content pipeline</td><td>First-look sync rights in exchange for capital contribution</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="highlight">
-    <div class="hl-label">The Pitch</div>
-    <div class="hl-val" style="font-size:16px;line-height:1.65">"We are building a catalog. Every recording advance is an asset that earns for 70 years. We are not asking you to fund salaries — we are asking you to co-own master recordings of artists we believe in, operated by a label with the taste and infrastructure to build meaningful careers. $2.2M deployed over two years gets us to operational profitability by Year 3, with a catalog worth multiples of your investment by Year 4–5. Return is tied to catalog performance, not a fixed repayment schedule. Catalogs, unlike startups, do not go to zero."</div>
-  </div>
 </div>
 
 <!-- ======================================================= JOINT VENTURE -->
@@ -1070,22 +1052,26 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
 
       <div class="builder-section-title" style="margin-top:28px">Revenue Split</div>
 
-      <div class="input-row">
-        <div class="input-label">
-          <span>Anemoia % — During Recoupment</span>
-          <span class="input-val" id="val-split-during">70%</span>
-        </div>
-        <input type="range" class="jv-slider" id="inp-split-during" min="50" max="85" step="5" value="70" oninput="jvUpdate()">
-        <div class="slider-range-labels"><span>50/50</span><span>85/15</span></div>
+      <div style="font-size:10px;color:var(--ink-mid);line-height:1.8;margin-bottom:18px;padding:10px 14px;border-left:3px solid var(--border-dark);background:var(--bg2)">
+        <strong style="color:var(--ink)">Buy-in structure, not a loan.</strong> Partner pays the buy-in and receives their share of net receipts from Day 1 — in perpetuity on masters signed during the term. Operations funding is non-recoupable. Recording &amp; marketing costs recoup only from the artist's share.
       </div>
 
       <div class="input-row">
         <div class="input-label">
-          <span>Anemoia % — Post Recoupment</span>
-          <span class="input-val" id="val-split-post">80%</span>
+          <span>Distribution Fee (partner takes off top)</span>
+          <span class="input-val" id="val-distrib-fee">21%</span>
         </div>
-        <input type="range" class="jv-slider" id="inp-split-post" min="65" max="95" step="5" value="80" oninput="jvUpdate()">
-        <div class="slider-range-labels"><span>65/35</span><span>95/5</span></div>
+        <input type="range" class="jv-slider" id="inp-distrib-fee" min="15" max="25" step="1" value="21" oninput="jvUpdate()">
+        <div class="slider-range-labels"><span>15% (favorable)</span><span>25% (standard)</span></div>
+      </div>
+
+      <div class="input-row">
+        <div class="input-label">
+          <span>Anemoia % of Net Receipts</span>
+          <span class="input-val" id="val-net-split">50%</span>
+        </div>
+        <input type="range" class="jv-slider" id="inp-net-split" min="40" max="70" step="5" value="50" oninput="jvUpdate()">
+        <div class="slider-range-labels"><span>40% (partner-favorable)</span><span>70% (push for this)</span></div>
       </div>
 
       <div class="builder-section-title" style="margin-top:28px">Partner Infrastructure Uplift</div>
@@ -1169,7 +1155,7 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
   </div>
 
   <!-- Recoupment -->
-  <div class="section-head">Recoupment <em>Projection</em></div>
+  <div class="section-head">Partner <em>Break-Even Timeline</em></div>
   <div style="background:var(--surface);border:1px solid var(--border-dark);margin-bottom:28px">
     <div style="padding:18px 24px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
       <div style="font-size:10px;color:var(--ink-mid);max-width:600px;line-height:1.7">Partner's share of JV revenue accumulates until their total investment is recouped. Post-recoupment your split improves. Revenue projections use your 3-year plan scaled by the uplift factor you set.</div>
@@ -1348,44 +1334,47 @@ function fmtShort(n) {
 }
 
 function jvUpdate() {
-  const partner      = document.getElementById('inp-partner').value || 'Partner';
-  const artist       = document.getElementById('inp-artist').value  || 'Artist';
-  const recordings   = parseInt(document.getElementById('inp-recordings').value);
-  const recording    = parseInt(document.getElementById('inp-recording').value);
-  const marketing    = parseInt(document.getElementById('inp-marketing').value);
-  const ops          = parseInt(document.getElementById('inp-ops').value);
-  const splitDuring  = parseInt(document.getElementById('inp-split-during').value);
-  const splitPost    = parseInt(document.getElementById('inp-split-post').value);
-  const upliftRaw    = parseInt(document.getElementById('inp-uplift').value);
-  const uplift       = upliftRaw / 10;
+  const partner    = document.getElementById('inp-partner').value || 'Partner';
+  const artist     = document.getElementById('inp-artist').value  || 'Artist';
+  const recordings = parseInt(document.getElementById('inp-recordings').value);
+  const recording  = parseInt(document.getElementById('inp-recording').value);
+  const marketing  = parseInt(document.getElementById('inp-marketing').value);
+  const ops        = parseInt(document.getElementById('inp-ops').value);
+  const distribFee = parseInt(document.getElementById('inp-distrib-fee').value) / 100;
+  const netSplit   = parseInt(document.getElementById('inp-net-split').value) / 100;
+  const upliftRaw  = parseInt(document.getElementById('inp-uplift').value);
+  const uplift     = upliftRaw / 10;
 
-  const total         = recording + marketing + ops;
-  const perRec        = Math.round(total / recordings);
-  const recPerRec     = recording / recordings;
-  const mktPerRec     = marketing / recordings;
-  const partnerDuring = (100 - splitDuring) / 100;
-  const partnerPost   = (100 - splitPost)   / 100;
+  // Revenue share math
+  // Partner takes distribFee off gross, then (1-netSplit) of remaining net receipts
+  const pShare  = distribFee + (1 - distribFee) * (1 - netSplit);  // partner's total % of gross
+  const aShare  = (1 - distribFee) * netSplit;                     // Anemoia's % of gross
 
-  // Labels
-  document.getElementById('val-recordings').textContent    = recordings;
-  document.getElementById('val-recording').textContent     = fmtShort(recording);
-  document.getElementById('val-marketing').textContent     = fmtShort(marketing);
-  document.getElementById('val-ops').textContent           = fmtShort(ops);
-  document.getElementById('val-split-during').textContent  = splitDuring + '%';
-  document.getElementById('val-split-post').textContent    = splitPost + '%';
-  document.getElementById('val-uplift').textContent        = uplift.toFixed(1) + 'x';
+  const total    = recording + marketing + ops;
+  const perRec   = Math.round(total / recordings);
+  const recPerRec = recording / recordings;
+  const mktPerRec = marketing / recordings;
 
-  // Partner name
+  // Slider labels
+  document.getElementById('val-recordings').textContent  = recordings;
+  document.getElementById('val-recording').textContent   = fmtShort(recording);
+  document.getElementById('val-marketing').textContent   = fmtShort(marketing);
+  document.getElementById('val-ops').textContent         = fmtShort(ops);
+  document.getElementById('val-distrib-fee').textContent = Math.round(distribFee * 100) + '%';
+  document.getElementById('val-net-split').textContent   = Math.round(netSplit * 100) + '%';
+  document.getElementById('val-uplift').textContent      = uplift.toFixed(1) + '×';
+
+  // Partner name propagation
   document.getElementById('jv-header-partner').textContent = partner;
   document.getElementById('out-partner-name').textContent  = partner;
   document.querySelectorAll('.jv-partner-ref').forEach(el => el.textContent = partner);
 
   // Ask total
-  document.getElementById('out-total').textContent         = fmtFull(total);
-  document.getElementById('out-term-display').textContent  = jvTerm + '-year';
-  document.getElementById('out-rec-count').textContent     = recordings;
-  document.getElementById('out-per-rec').textContent       = fmtShort(perRec) + ' / rec';
-  document.getElementById('out-uplift-label').textContent  = 'at ' + uplift.toFixed(1) + 'x uplift';
+  document.getElementById('out-total').textContent        = fmtFull(total);
+  document.getElementById('out-term-display').textContent = jvTerm + '-year';
+  document.getElementById('out-rec-count').textContent    = recordings;
+  document.getElementById('out-per-rec').textContent      = fmtShort(perRec) + ' / rec';
+  document.getElementById('out-uplift-label').textContent = 'at ' + uplift.toFixed(1) + '× uplift';
 
   // Breakdown bar
   document.getElementById('bar-recording').style.width = ((recording/total)*100).toFixed(1) + '%';
@@ -1402,75 +1391,78 @@ function jvUpdate() {
     { label:'Label Operations',           total:ops,       perR:null,      ok:ops>=OPEX_GAP_2YR, warn:ops>=OPEX_GAP_2YR*0.8, bench:'$386k+ covers 2-yr OPEX gap' },
   ];
   document.getElementById('out-breakdown-table').innerHTML = rows.map(r => {
-    const cls = r.ok ? 'c-green' : r.warn ? 'c-warn' : 'c-red';
+    const cls  = r.ok ? 'c-green' : r.warn ? 'c-warn' : 'c-red';
     const icon = r.ok ? '&#10003;' : r.warn ? '~' : '&#8595;';
     return `<tr><td>${r.label}</td><td>${fmtFull(r.total)}</td><td>${r.perR!==null?fmtShort(Math.round(r.perR)):'—'}</td><td class="${cls}" style="font-size:10px">${icon} ${r.bench}</td></tr>`;
   }).join('');
 
-  // Health
-  const allOk = rows.every(r => r.ok);
+  // Health badge
+  const allOk  = rows.every(r => r.ok);
   const anyBad = rows.some(r => !r.warn);
-  const badge = document.getElementById('out-health-badge');
-  if (allOk) { badge.className='health-badge health-adequate'; badge.innerHTML='&#10003; Well-Funded'; }
+  const badge  = document.getElementById('out-health-badge');
+  if (allOk)       { badge.className='health-badge health-adequate';    badge.innerHTML='&#10003; Well-Funded'; }
   else if (anyBad) { badge.className='health-badge health-underfunded'; badge.innerHTML='&#8595; Under-Funded'; }
-  else { badge.className='health-badge health-tight'; badge.innerHTML='~ Tight — workable, no buffer'; }
+  else             { badge.className='health-badge health-tight';       badge.innerHTML='~ Tight — workable, no buffer'; }
 
   document.getElementById('out-health-items').innerHTML = rows.map(r => {
-    const cls = r.ok?'hi-ok':r.warn?'hi-warn':'hi-bad';
-    const txt = r.ok?'Solid':r.warn?'Workable':'At Risk';
-    const detail = r.perR!==null
+    const cls    = r.ok ? 'hi-ok' : r.warn ? 'hi-warn' : 'hi-bad';
+    const txt    = r.ok ? 'Solid' : r.warn ? 'Workable' : 'At Risk';
+    const detail = r.perR !== null
       ? r.label.replace(/&amp;/g,'&') + ': ' + fmtShort(Math.round(r.perR)) + ' per recording'
       : 'Ops covers ' + Math.round((ops/OPEX_GAP_2YR)*100) + '% of 2-year OPEX gap ($386k)';
     return `<div class="health-item"><span class="health-item-label">${detail}</span><span class="health-item-status ${cls}">${txt}</span></div>`;
   }).join('');
 
-  // JV revenue (with uplift)
+  // JV revenue (base plan × uplift multiplier)
   const jvRev = BASE_REVENUE.map(r => Math.round(r * uplift));
   for (let i = BASE_REVENUE.length; i < 7; i++) jvRev.push(Math.round(jvRev[jvRev.length-1] * 1.12));
 
-  // Recoupment
-  let remaining = total, cumulative = 0, recoupYear = null;
-  const recoupRows = [];
+  // Partner Break-Even Timeline
+  // Partner's total take = pShare of gross each year
+  // Break-even: when cumulative partner receipts ≥ total buy-in
+  let remaining = total, cumulative = 0, breakEvenYear = null;
+  const breakEvenRows = [];
   for (let i = 0; i < jvRev.length; i++) {
-    const rev = jvRev[i];
-    const pShare = remaining > 0 ? partnerDuring : partnerPost;
+    const rev  = jvRev[i];
     const take = Math.round(rev * pShare);
     const prev = remaining;
     cumulative = Math.min(cumulative + take, total);
     remaining  = Math.max(0, remaining - take);
-    if (prev > 0 && remaining === 0 && !recoupYear) recoupYear = i + 1;
-    recoupRows.push({ year:i+1, rev, take, cumulative, remaining, pct:Math.round(pShare*100) });
+    if (prev > 0 && remaining === 0 && !breakEvenYear) breakEvenYear = i + 1;
+    breakEvenRows.push({ year:i+1, rev, take, cumulative, remaining, pct:Math.round(pShare*100) });
     if (remaining === 0 && i >= jvTerm) break;
   }
 
-  document.getElementById('out-recoup-table').innerHTML = recoupRows.map(r => {
-    const isHit = recoupYear && r.year === recoupYear;
+  document.getElementById('out-recoup-table').innerHTML = breakEvenRows.map(r => {
+    const isHit  = breakEvenYear && r.year === breakEvenYear;
     const inTerm = r.year <= jvTerm;
     const yrColor = r.year <= 3 ? `var(--y${r.year})` : 'var(--y3)';
-    return `<tr class="${isHit?'recoup-hit':''}">
+    return `<tr class="${isHit ? 'recoup-hit' : ''}">
       <td>Year ${r.year}${!inTerm?' <span style="font-size:9px;color:var(--ink-dim)">(ext.)</span>':''}</td>
       <td style="color:${yrColor}">${fmtFull(r.rev)}</td>
-      <td>${fmtFull(r.take)} <span style="font-size:9px;color:var(--ink-dim)">${r.pct}%</span></td>
+      <td>${fmtFull(r.take)} <span style="font-size:9px;color:var(--ink-dim)">(${r.pct}% of gross)</span></td>
       <td>${fmtFull(r.cumulative)}</td>
-      <td class="${r.remaining===0?'c-green':'c-warn'}">${r.remaining===0?'&#10003; Recouped':fmtFull(r.remaining)}</td>
+      <td class="${r.remaining===0?'c-green':'c-warn'}">${r.remaining===0?'&#10003; Break-Even':fmtFull(r.remaining)+' remaining'}</td>
     </tr>`;
   }).join('');
 
-  const lastRow = recoupRows[recoupRows.length-1];
-  document.getElementById('out-recoup-bar').style.width = Math.min(100,(lastRow.cumulative/total)*100).toFixed(1)+'%';
-  document.getElementById('out-recoup-bar-label').textContent = fmtFull(total) + ' ask';
-  document.getElementById('out-recoup-status').textContent = recoupYear ? 'Recoupment projected: Year ' + recoupYear : 'Recoupment beyond modeled window';
+  const lastRow = breakEvenRows[breakEvenRows.length-1];
+  document.getElementById('out-recoup-bar').style.width        = Math.min(100,(lastRow.cumulative/total)*100).toFixed(1)+'%';
+  document.getElementById('out-recoup-bar-label').textContent  = fmtFull(total) + ' buy-in';
+  document.getElementById('out-recoup-status').textContent     = breakEvenYear
+    ? 'Partner break-even: Year ' + breakEvenYear
+    : 'Break-even beyond modeled window';
 
-  // Comparison table
-  let totalUnaided=0, totalJVNet=0;
+  // Comparison: Anemoia's net with JV vs. going it alone
+  let totalUnaided = 0, totalJVNet = 0;
   let compHTML = '';
-  for (let i = 0; i < Math.min(jvTerm, 3); i++) {
+  for (let i = 0; i < Math.min(jvTerm, BASE_REVENUE.length); i++) {
     const unaided = BASE_REVENUE[i];
     const jv      = jvRev[i];
-    const aShare  = (recoupRows[i] && recoupRows[i].remaining > 0) ? splitDuring/100 : splitPost/100;
     const net     = Math.round(jv * aShare);
     const diff    = net - unaided;
-    totalUnaided += unaided; totalJVNet += net;
+    totalUnaided += unaided;
+    totalJVNet   += net;
     const yrColor = `var(--y${i+1})`;
     compHTML += `<tr>
       <td>Year ${i+1}</td>
@@ -1480,35 +1472,43 @@ function jvUpdate() {
       <td class="${diff>=0?'c-green':'c-red'}">${diff>=0?'+':''}${fmtFull(diff)}</td>
     </tr>`;
   }
-  compHTML += `<tr class="total"><td>${jvTerm}-Yr Total</td><td>${fmtFull(totalUnaided)}</td><td>—</td><td>${fmtFull(totalJVNet)}</td><td class="${totalJVNet>=totalUnaided?'c-green':'c-red'}">${totalJVNet>=totalUnaided?'+':''}${fmtFull(totalJVNet-totalUnaided)}</td></tr>`;
+  compHTML += `<tr class="total">
+    <td>${jvTerm}-Yr Total</td>
+    <td>${fmtFull(totalUnaided)}</td>
+    <td>—</td>
+    <td>${fmtFull(totalJVNet)}</td>
+    <td class="${totalJVNet>=totalUnaided?'c-green':'c-red'}">${totalJVNet>=totalUnaided?'+':''}${fmtFull(totalJVNet-totalUnaided)}</td>
+  </tr>`;
   document.getElementById('out-comparison-table').innerHTML = compHTML;
 
   const netDiff = totalJVNet - totalUnaided;
+  const distribPct = Math.round(distribFee * 100);
+  const netPct     = Math.round(netSplit * 100);
   document.getElementById('out-comparison-note').innerHTML = netDiff >= 0
-    ? `At ${uplift.toFixed(1)}x uplift you net <strong>${fmtFull(netDiff)} more</strong> over ${jvTerm} years with the JV than going it alone — despite the ${100-splitDuring}% split. The infrastructure multiplier more than compensates.`
-    : `At ${uplift.toFixed(1)}x uplift the split costs you <strong>${fmtFull(Math.abs(netDiff))}</strong> vs. going unaided over ${jvTerm} years. Consider pushing for a better split, or raise the uplift assumption if the partner's infrastructure is genuinely transformative.`;
+    ? `At ${uplift.toFixed(1)}× uplift, Anemoia nets <strong>${fmtFull(netDiff)} more</strong> over ${jvTerm} years with the JV than going it alone — the infrastructure multiplier more than offsets the ${distribPct}% distrib fee + ${100-netPct}% net receipt split.`
+    : `At ${uplift.toFixed(1)}× uplift the deal costs Anemoia <strong>${fmtFull(Math.abs(netDiff))}</strong> vs. going it alone. Push for a higher net split or a lower distrib fee — or raise the uplift assumption if the partner's infrastructure is genuinely transformative.`;
 
-  // Narrative
-  const recoupStr  = recoupYear ? 'Year ' + recoupYear : 'beyond the modeled window';
-  const healthWord = allOk ? 'fully justified' : anyBad ? 'a minimum-viable ask — any lower risks being underfunded mid-term' : 'lean but workable';
+  // Auto-generated narrative
+  const breakEvenStr = breakEvenYear ? 'Year ' + breakEvenYear : 'beyond the modeled window';
+  const healthWord   = allOk ? 'fully justified' : anyBad ? 'a minimum-viable ask — any lower risks being underfunded mid-term' : 'lean but workable';
   document.getElementById('out-narrative').innerHTML = `
     Anemoia Records proposes a <strong>${jvTerm}-year Funding and Distribution Joint Venture</strong> with <strong>${partner}</strong>,
-    anchored by <strong>${artist}</strong> and covering a defined slate of up to <strong>${recordings} recordings</strong>.
+    anchored by <strong>${artist}</strong> and covering a slate of up to <strong>${recordings} recordings</strong>.
     <br><br>
-    The total commitment requested is <strong>${fmtFull(total)}</strong> — structured as ${fmtFull(recording)} in recording and production
-    (${fmtShort(Math.round(recPerRec))} per recording), ${fmtFull(marketing)} in marketing and promotion
+    The total buy-in requested is <strong>${fmtFull(total)}</strong> — ${fmtFull(recording)} in recording &amp; production
+    (${fmtShort(Math.round(recPerRec))} per recording), ${fmtFull(marketing)} in marketing &amp; promotion
     (${fmtShort(Math.round(mktPerRec))} per release), and ${fmtFull(ops)} in label operations support.
     At these numbers the ask is <strong>${healthWord}</strong>.
     <br><br>
-    Net receipts will be divided <strong>${splitDuring}/${100-splitDuring} during recoupment</strong>, adjusting to <strong>${splitPost}/${100-splitPost} post-recoupment</strong>.
-    Based on Anemoia's 3-year revenue projections with a ${uplift.toFixed(1)}x infrastructure uplift from ${partner}'s distribution and sync network,
-    <strong>the investment is projected to recoup in ${recoupStr}</strong>.
+    This is a <strong>buy-in structure, not a loan.</strong> ${partner} pays the buy-in and receives a
+    <strong>${distribPct}% distribution fee off gross</strong>, then <strong>${100-netPct}% of net receipts</strong> in perpetuity on
+    masters signed during the term. Operations funding is non-recoupable.
+    Based on Anemoia's 3-year revenue model with a ${uplift.toFixed(1)}× infrastructure uplift from ${partner}'s
+    distribution and sync network, <strong>${partner}'s break-even is projected in ${breakEvenStr}</strong>.
     <br><br>
-    Anemoia retains full ownership of all master recordings throughout. All rights revert at end of term — no holdback periods.
+    Anemoia retains full ownership of all master recordings. All rights revert at end of term — no holdback periods.
     ${partner} receives exclusive distribution rights for the JV term, a 30-day right of first refusal on new Anemoia signings,
-    and an active role in pitching the JV catalog through their sync placement network.
-    This is a high-conviction partnership opportunity structured to give ${partner} genuine upside
-    while keeping Anemoia positioned to build lasting catalog value independently.
+    and an active role pitching the catalog through their sync placement network.
   `;
 }
 
