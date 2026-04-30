@@ -971,7 +971,7 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
   <div class="page-header">
     <div class="page-title">Joint Venture <em>Proposal</em></div>
     <div class="page-meta">
-      <span id="jv-header-partner">26.2 / Sony Music</span><br>
+      <span id="jv-header-partner">JV Partner</span><br>
       <span class="jv-live-tag"><span class="jv-live-dot"></span>Live Model</span>
     </div>
   </div>
@@ -995,7 +995,7 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
 
       <div class="input-row">
         <div class="input-label">Label Partner</div>
-        <input type="text" class="jv-text" id="inp-partner" value="26.2 / Sony Music" oninput="jvUpdate()">
+        <input type="text" class="jv-text" id="inp-partner" value="JV Partner" oninput="jvUpdate()">
       </div>
 
       <div class="input-row">
@@ -1096,7 +1096,7 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
         <div class="ask-lbl">Total JV Ask</div>
         <div class="ask-total-num" id="out-total">$2,200,000</div>
         <div class="ask-total-sub">
-          Proposed to <strong id="out-partner-name" style="color:#f5f2eb">26.2 / Sony Music</strong><br>
+          Proposed to <strong id="out-partner-name" style="color:#f5f2eb">JV Partner</strong><br>
           <span id="out-term-display">3-year</span> term &nbsp;·&nbsp; <span id="out-rec-count">20</span> recordings &nbsp;·&nbsp; <span id="out-per-rec">$110k / rec</span>
         </div>
       </div>
@@ -1195,7 +1195,7 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
       </div>
       <div class="deal-item">
         <div class="deal-item-key">License Grant</div>
-        <div class="deal-item-val"><strong class="jv-partner-ref">26.2 / Sony Music</strong> receives an exclusive distribution license for the JV term only. All rights revert fully to Anemoia at expiry — no holdback periods.</div>
+        <div class="deal-item-val"><strong class="jv-partner-ref">JV Partner</strong> receives an exclusive distribution license for the JV term only. All rights revert fully to Anemoia at expiry — no holdback periods.</div>
       </div>
       <div class="deal-item">
         <div class="deal-item-key">Co-Ownership Option</div>
@@ -1207,7 +1207,7 @@ tr.recoup-hit td { background: rgba(45,96,64,0.07); }
       <div class="deal-card-title">Creative Control</div>
       <div class="deal-item">
         <div class="deal-item-key">A&amp;R Authority</div>
-        <div class="deal-item-val">Anemoia retains <strong>sole and final A&amp;R authority</strong>. <span class="jv-partner-ref">26.2</span> has no approval rights over signings or creative direction.</div>
+        <div class="deal-item-val">Anemoia retains <strong>sole and final A&amp;R authority</strong>. <span class="jv-partner-ref">JV Partner</span> has no approval rights over signings or creative direction.</div>
       </div>
       <div class="deal-item">
         <div class="deal-item-key">Marketing &amp; Release</div>
@@ -1263,9 +1263,20 @@ function showPage(id, el) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  el.classList.add('active');
+  if (el) el.classList.add('active');
+  history.replaceState(null, '', '#' + id);
   if (id === 'jv') jvUpdate();
 }
+
+function routeFromHash() {
+  const id = (location.hash || '').replace('#', '') || 'overview';
+  const tab = document.querySelector(`.nav-tab[onclick*="'${id}'"]`);
+  const page = document.getElementById('page-' + id);
+  if (page) showPage(id, tab);
+  else showPage('overview', document.querySelector(".nav-tab[onclick*=\"'overview'\"]"));
+}
+
+window.addEventListener('hashchange', routeFromHash);
 
 // Revenue ramp bar chart
 const sources = [
@@ -1512,7 +1523,7 @@ function jvUpdate() {
   `;
 }
 
-document.addEventListener('DOMContentLoaded', jvUpdate);
+document.addEventListener('DOMContentLoaded', routeFromHash);
 </script>
 </body>
 </html>
