@@ -1217,7 +1217,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
           </div>
         </div>
         <table style="margin-top:16px">
-          <thead><tr><th>Component</th><th>Total</th><th>Per Recording</th><th>Status</th></tr></thead>
+          <thead><tr><th>Component</th><th>Total</th><th>Avg. per Release</th><th>Status</th></tr></thead>
           <tbody id="out-breakdown-table"></tbody>
         </table>
       </div>
@@ -1496,7 +1496,7 @@ function jvUpdate() {
   document.getElementById('out-total').textContent        = fmtFull(total);
   document.getElementById('out-term-display').textContent = jvTerm + '-year';
   document.getElementById('out-rec-count').textContent    = recordings;
-  document.getElementById('out-per-rec').textContent      = fmtShort(perRec) + ' / release';
+  document.getElementById('out-per-rec').textContent      = fmtShort(perRec) + ' avg / release';
   document.getElementById('out-uplift-label').textContent = 'at ' + uplift.toFixed(1) + '× uplift';
 
   // Breakdown bar
@@ -1531,7 +1531,7 @@ function jvUpdate() {
     const cls    = r.ok ? 'hi-ok' : r.warn ? 'hi-warn' : 'hi-bad';
     const txt    = r.ok ? 'Solid' : r.warn ? 'Workable' : 'At Risk';
     const detail = r.perR !== null
-      ? r.label.replace(/&amp;/g,'&') + ': ' + fmtShort(Math.round(r.perR)) + ' per release'
+      ? r.label.replace(/&amp;/g,'&') + ': ' + fmtShort(Math.round(r.perR)) + ' avg per release'
       : 'Ops covers ' + Math.round((ops/OPEX_GAP_2YR)*100) + '% of 2-year OPEX gap ($386k)';
     return `<div class="health-item"><span class="health-item-label">${detail}</span><span class="health-item-status ${cls}">${txt}</span></div>`;
   }).join('');
