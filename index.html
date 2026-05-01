@@ -1050,11 +1050,6 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
       </div>
 
       <div class="input-row">
-        <div class="input-label">Anchor Artist / Project</div>
-        <input type="text" class="jv-text" id="inp-artist" value="The Sound Chalk Makes" oninput="jvUpdate()">
-      </div>
-
-      <div class="input-row">
         <div class="input-label">
           <span>Releases in Slate</span>
           <span class="input-val" id="val-recordings">20</span>
@@ -1448,7 +1443,6 @@ function fmtShort(n) {
 
 function jvUpdate() {
   const partner    = document.getElementById('inp-partner').value || 'Partner';
-  const artist     = document.getElementById('inp-artist').value  || 'Artist';
   const recordings = parseInt(document.getElementById('inp-recordings').value);
   const recY = [1,2,3].map(i => parseInt(document.getElementById('inp-rec-y'+i).value));
   const mktY = [1,2,3].map(i => parseInt(document.getElementById('inp-mkt-y'+i).value));
@@ -1633,7 +1627,7 @@ function jvUpdate() {
   const healthWord   = allOk ? 'fully justified' : anyBad ? 'a minimum-viable ask — any lower risks being underfunded mid-term' : 'lean but workable';
   document.getElementById('out-narrative').innerHTML = `
     Anemoia Records proposes a <strong>${jvTerm}-year Funding and Distribution Joint Venture</strong> with <strong>${partner}</strong>,
-    anchored by <strong>${artist}</strong> and covering a slate of up to <strong>${recordings} releases</strong>.
+    covering a slate of up to <strong>${recordings} releases</strong>.
     <br><br>
     The total buy-in requested is <strong>${fmtFull(total)}</strong> — ${fmtFull(recording)} in recording &amp; production
     (${fmtShort(Math.round(recPerRec))} per release), ${fmtFull(marketing)} in marketing &amp; promotion
