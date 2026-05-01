@@ -1054,7 +1054,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
           <span>Releases in Slate</span>
           <span class="input-val" id="val-recordings">20</span>
         </div>
-        <input type="range" class="jv-slider" id="inp-recordings" min="5" max="250" step="5" value="20" oninput="jvUpdate()">
+        <input type="range" class="jv-slider" id="inp-recordings" min="5" max="250" step="5" value="80" oninput="jvUpdate()">
         <div class="slider-range-labels"><span>5 releases</span><span>250 releases</span></div>
       </div>
 
@@ -1084,15 +1084,15 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
             <td>Recording &amp; Production</td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-rec-y1">$250k</div>
-              <input type="range" class="jv-slider" id="inp-rec-y1" min="25000" max="750000" step="25000" value="250000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-rec-y1" min="25000" max="750000" step="25000" value="750000" oninput="jvUpdate()">
             </td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-rec-y2">$350k</div>
-              <input type="range" class="jv-slider" id="inp-rec-y2" min="25000" max="750000" step="25000" value="350000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-rec-y2" min="25000" max="750000" step="25000" value="600000" oninput="jvUpdate()">
             </td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-rec-y3">$350k</div>
-              <input type="range" class="jv-slider" id="inp-rec-y3" min="25000" max="750000" step="25000" value="350000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-rec-y3" min="25000" max="750000" step="25000" value="500000" oninput="jvUpdate()">
             </td>
             <td id="val-rec-total">$950k</td>
           </tr>
@@ -1100,15 +1100,15 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
             <td>Marketing &amp; Promotion</td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-mkt-y1">$100k</div>
-              <input type="range" class="jv-slider" id="inp-mkt-y1" min="25000" max="750000" step="25000" value="100000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-mkt-y1" min="25000" max="750000" step="25000" value="250000" oninput="jvUpdate()">
             </td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-mkt-y2">$150k</div>
-              <input type="range" class="jv-slider" id="inp-mkt-y2" min="25000" max="750000" step="25000" value="150000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-mkt-y2" min="25000" max="750000" step="25000" value="400000" oninput="jvUpdate()">
             </td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-mkt-y3">$250k</div>
-              <input type="range" class="jv-slider" id="inp-mkt-y3" min="25000" max="750000" step="25000" value="250000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-mkt-y3" min="25000" max="750000" step="25000" value="500000" oninput="jvUpdate()">
             </td>
             <td id="val-mkt-total">$500k</td>
           </tr>
@@ -1116,15 +1116,15 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
             <td>Label Operations</td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-ops-y1">$300k</div>
-              <input type="range" class="jv-slider" id="inp-ops-y1" min="25000" max="750000" step="25000" value="300000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-ops-y1" min="25000" max="750000" step="25000" value="500000" oninput="jvUpdate()">
             </td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-ops-y2">$250k</div>
-              <input type="range" class="jv-slider" id="inp-ops-y2" min="25000" max="750000" step="25000" value="250000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-ops-y2" min="25000" max="750000" step="25000" value="500000" oninput="jvUpdate()">
             </td>
             <td class="budget-cell">
               <div class="budget-cell-val" id="val-ops-y3">$200k</div>
-              <input type="range" class="jv-slider" id="inp-ops-y3" min="25000" max="750000" step="25000" value="200000" oninput="jvUpdate()">
+              <input type="range" class="jv-slider" id="inp-ops-y3" min="25000" max="750000" step="25000" value="500000" oninput="jvUpdate()">
             </td>
             <td id="val-ops-total">$750k</td>
           </tr>
@@ -1421,7 +1421,7 @@ function setScenario(s, el) {
   // [rec-y1, rec-y2, rec-y3, mkt-y1, mkt-y2, mkt-y3, ops-y1, ops-y2, ops-y3]
   const sc = {
     lean:      [150000, 200000, 250000,  75000, 100000, 175000, 175000, 150000, 125000],
-    balanced:  [250000, 350000, 350000, 100000, 150000, 250000, 300000, 250000, 200000],
+    balanced:  [750000, 600000, 500000, 250000, 400000, 500000, 500000, 500000, 500000],
     resourced: [350000, 425000, 425000, 150000, 225000, 325000, 400000, 325000, 275000],
   }[s];
   ['rec','mkt','ops'].forEach((cat, ci) =>
