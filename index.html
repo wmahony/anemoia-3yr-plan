@@ -426,10 +426,6 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
     <div class="page-meta">Anemoia Records<br>Confidential — Internal Use</div>
   </div>
 
-  <div class="callout">
-    <strong>Structure:</strong> Investor capital funds a 3-year runway. Year 1 is infrastructure and catalog-building — revenue is intentionally minimal. Year 2 is the growth ramp as the Year 1 catalog begins earning. Year 3 is operational break-even, at which point the business is self-sustaining and investor distributions can begin. The $1M deal fund is raised at close and deployed in two equal tranches — $500k per year across Year 1 and Year 2.
-  </div>
-
   <div style="border:1px solid var(--border-dark);background:var(--surface);margin-bottom:28px;">
     <table>
       <thead>
@@ -452,7 +448,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
       <tbody>
         <tr class="section-row"><td colspan="4" style="padding-left:20px">OPERATING EXPENSES</td></tr>
         <tr class="sub"><td style="padding-left:20px">Full-Time Salaries</td><td>$324,000</td><td>$324,000</td><td>$434,000</td></tr>
-        <tr class="sub"><td style="padding-left:20px">Part-Time Consultants (3)</td><td>$75,000</td><td>$75,000</td><td>$75,000</td></tr>
+        <tr class="sub"><td style="padding-left:20px">Part-Time Consultants (3)</td><td>$54,000</td><td>$54,000</td><td>$54,000</td></tr>
         <tr class="sub"><td style="padding-left:20px">Health Insurance</td><td>$21,600</td><td>$21,600</td><td>$28,800</td></tr>
         <tr class="sub"><td style="padding-left:20px">Payroll Taxes</td><td>$28,000</td><td>$28,000</td><td>$30,000</td></tr>
         <tr class="sub"><td style="padding-left:20px">Office &amp; Studio</td><td>$60,000</td><td>$60,000</td><td>$60,000</td></tr>
@@ -461,7 +457,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
         <tr class="sub"><td style="padding-left:20px">Accounting &amp; Bookkeeping</td><td>$10,000</td><td>$10,000</td><td>$10,000</td></tr>
         <tr class="sub"><td style="padding-left:20px">Business Insurance</td><td>$6,000</td><td>$6,000</td><td>$6,000</td></tr>
         <tr class="sub"><td style="padding-left:20px">Travel &amp; Entertainment</td><td>$15,000</td><td>$15,000</td><td>$15,000</td></tr>
-        <tr class="subtotal"><td style="padding-left:20px">Total Operating Expenses</td><td>$563,600</td><td>$561,600</td><td>$630,800</td></tr>
+        <tr class="subtotal"><td style="padding-left:20px">Total Operating Expenses</td><td>$542,600</td><td>$540,600</td><td>$609,800</td></tr>
 
         <tr class="section-row"><td colspan="4" style="padding-left:20px">DEAL FUNDS — $1M pool, drawn $500k/year</td></tr>
         <tr class="sub"><td style="padding-left:20px">Recording Fund</td><td>$250,000</td><td>$250,000</td><td>$0</td></tr>
@@ -539,12 +535,12 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
 
   <div class="grid-2">
     <div class="card">
-      <div class="card-title">Operating Expenses <span>$46,967 / month avg.</span></div>
+      <div class="card-title">Operating Expenses <span>$45,217 / month avg.</span></div>
       <table>
         <thead><tr><th>Line Item</th><th>/Month</th><th>/Year</th></tr></thead>
         <tbody>
           <tr><td>Full-Time Salaries (3)</td><td>$25,000</td><td>$300,000</td></tr>
-          <tr><td>Part-Time Consultants (3)</td><td>$6,250</td><td>$75,000</td></tr>
+          <tr><td>Part-Time Consultants (3)</td><td>$4,500</td><td>$54,000</td></tr>
           <tr><td>Admin / Assistant</td><td>$2,000</td><td>$24,000</td></tr>
           <tr><td>Health Insurance (W2 employees)</td><td>$1,800</td><td>$21,600</td></tr>
           <tr><td>Payroll Taxes</td><td>$2,333</td><td>$28,000</td></tr>
@@ -554,7 +550,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
           <tr><td>Accounting</td><td>$833</td><td>$10,000</td></tr>
           <tr><td>Business Insurance</td><td>$500</td><td>$6,000</td></tr>
           <tr><td>Travel &amp; Entertainment</td><td>$1,250</td><td>$15,000</td></tr>
-          <tr class="total"><td>Total OPEX</td><td>$46,967</td><td>$563,600</td></tr>
+          <tr class="total"><td>Total OPEX</td><td>$45,217</td><td>$542,600</td></tr>
         </tbody>
       </table>
     </div>
@@ -1035,7 +1031,7 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
   <div class="scenario-bar">
     <div class="scenario-lbl">Start from:</div>
     <button class="scenario-btn" onclick="setScenario('lean', this)">Lean — $1.4M</button>
-    <button class="scenario-btn active" onclick="setScenario('balanced', this)">Balanced — $2.2M</button>
+    <button class="scenario-btn active" onclick="setScenario('balanced', this)">Balanced — $4.545M</button>
     <button class="scenario-btn" onclick="setScenario('resourced', this)">Well-Resourced — $2.9M</button>
   </div>
 
@@ -1407,7 +1403,7 @@ if (chart) {
 // ==================== JV MODULE ====================
 
 const BASE_REVENUE = [198000, 345000, 627000];
-const OPEX_GAP_2YR = 563600 + 561600; // full 2-yr operating costs: $1,125,200
+const OPEX_GAP_2YR = 542600 + 540600; // full 2-yr operating costs: $1,083,200
 
 let jvTerm = 3;
 
@@ -1422,7 +1418,7 @@ function setScenario(s, el) {
   // [rec-y1, rec-y2, rec-y3, mkt-y1, mkt-y2, mkt-y3, ops-y1, ops-y2, ops-y3]
   const sc = {
     lean:      [150000, 200000, 250000,  75000, 100000, 175000, 175000, 150000, 125000],
-    balanced:  [750000, 600000, 500000, 250000, 400000, 500000, 500000, 500000, 500000],
+    balanced:  [750000, 600000, 500000, 250000, 400000, 500000, 515000, 515000, 515000],
     resourced: [350000, 425000, 425000, 150000, 225000, 325000, 400000, 325000, 275000],
   }[s];
   ['rec','mkt','ops'].forEach((cat, ci) =>
