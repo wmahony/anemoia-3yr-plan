@@ -1056,15 +1056,6 @@ tr.recoup-hit td { background: rgba(16,185,129,0.06); }
         <div class="slider-range-labels"><span>5 releases</span><span>250 releases</span></div>
       </div>
 
-      <div class="input-row">
-        <div class="input-label">JV Term</div>
-        <div class="term-selector">
-          <div class="term-btn" onclick="setTerm(2, this)">2 Years</div>
-          <div class="term-btn active" onclick="setTerm(3, this)">3 Years</div>
-          <div class="term-btn" onclick="setTerm(4, this)">4 Years</div>
-        </div>
-      </div>
-
       <div class="builder-section-title" style="margin-top:28px">Budget Ask — by Year</div>
 
       <table class="budget-grid">
@@ -1375,16 +1366,9 @@ if (chart) {
 // ==================== JV MODULE ====================
 
 const BASE_REVENUE = [198000, 345000, 627000];
-const OPEX_GAP_2YR = 542600 + 540600; // full 2-yr operating costs: $1,083,200
+const OPEX_GAP_2YR = 542600 + 540600 + 609800; // full 3-yr operating costs: $1,693,000
 
-let jvTerm = 3;
-
-function setTerm(t, el) {
-  jvTerm = t;
-  document.querySelectorAll('.term-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  jvUpdate();
-}
+const jvTerm = 3;
 
 function setScenario(s, el) {
   // [rec-y1, rec-y2, rec-y3, mkt-y1, mkt-y2, mkt-y3, ops-y1, ops-y2, ops-y3]
@@ -1510,7 +1494,7 @@ function jvUpdate() {
     }
     const detail = r.perR !== null
       ? r.label.replace(/&amp;/g,'&') + ': ' + fmtShort(Math.round(r.perR)) + ' avg per release' + (r.neutral ? ' (floor TBD)' : '')
-      : 'Ops covers ' + Math.round((ops/OPEX_GAP_2YR)*100) + '% of full 2-year operating costs ($1.13M)';
+      : 'Ops covers ' + Math.round((ops/OPEX_GAP_2YR)*100) + '% of full 3-year operating costs ($1.63M)';
     return `<div class="health-item"><span class="health-item-label">${detail}</span><span class="health-item-status ${cls}" style="${r.neutral?'color:var(--ink-dim);border-color:var(--border-dark)':''}">${txt}</span></div>`;
   }).join('');
 
